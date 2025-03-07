@@ -1,0 +1,5 @@
+In order to run this application you will have to do 3 important steps:
+1. You will have to install all the dependencies: "npm install"
+2. Start the server: "npm start"
+3. You can now open your browser and go to http://localhost:3000
+
