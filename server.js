@@ -1,7 +1,7 @@
 const express = require("express");
 const mustacheExpress = require("mustache-express");
 const bodyParser = require("body-parser");
-const workoutRoutes = require("./routes/workoutRoutes");
+const workoutRoutes = require("./workoutRoutes");
 
 
 const app = express();
