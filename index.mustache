@@ -1,0 +1,54 @@
+<h1>Workout Tracker</h1>
+
+
+<h2>Add a New Workout</h2>
+<form action="/add" method="POST">
+    <label>Workout Type:</label>
+    <input type="text" name="workout_type" required>
+
+    <label>Duration (minutes):</label>
+    <input type="number" name="duration" required min="1">
+
+    <label>Calories Burned:</label>
+    <input type="number" name="calories_burned" required min="1">
+
+    <label>Date:</label>
+    <input type="date" name="workout_date" required>
+
+    <label>Notes:</label>
+    <textarea name="notes"></textarea>
+
+    <button type="submit">Add Workout</button>
+</form>
+
+
+{{^workouts}}
+<p style="color: red;">No workouts found in the database.</p>
+{{/workouts}}
+
+
+<h2>Workout History</h2>
+<table border="1">
+    <tr>
+        <th>Type</th>
+        <th>Duration</th>
+        <th>Calories</th>
+        <th>Date</th>
+        <th>Notes</th>
+        <th>Action</th>
+    </tr>
+    {{#workouts}}
+    <tr>
+        <td>{{workout_type}}</td>  
+        <td>{{duration}} min</td>
+        <td>{{calories_burned}} kcal</td>
+        <td>{{workout_date}}</td>
+        <td>{{notes}}</td>
+        <td>
+            <form action="/delete/{{id}}" method="POST">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    {{/workouts}}
+</table>

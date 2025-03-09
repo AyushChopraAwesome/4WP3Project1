@@ -1,36 +1,47 @@
-const express = require ("express");
+const express = require("express");
 const router = express.Router();
-const workoutModel = require("./workoutRoutes");
+const workoutModel = require("./workoutModel"); 
 
-router.get("/", (req , res) => {
+
+router.get("/", (req, res) => {
     workoutModel.getAllWorkouts((err, workouts) => {
-        if (err) return res.status(500).send("Database connection error");
-        res.render("index", {workouts});
+        if (err) {
+            console.error("❌ Database error:", err);
+            return res.status(500).send("Database error.");
+        }
+        res.render("index", { workouts: workouts });
     });
 });
 
-router.post("/add", (res, req) => {
-    const{ workout_type, duration, calories_burned, workout_date, notes} = req.body;
 
-    if (!workout_type || isNAN(duration) || isNaN(calories_burned) || !workout_date)
-    {
-        return res.status(400).send("Invalid Input");
+router.post("/add", (req, res) => {
+
+    if (!req.body || Object.keys(req.body).length === 0) {
+        return res.status(400).send("Error: No form data received.");
     }
 
+    const { workout_type, duration, calories_burned, workout_date, notes } = req.body;
+
     workoutModel.addWorkout(
-        {
-            type: workout_type, duration, calories: calories_burned, date: workout_date, notes
-        },
+        { type: workout_type, duration, calories: calories_burned, date: workout_date, notes },
         (err) => {
-            if (err) return res.status(500).send("Couldn't complete the process of adding workout");
+            if (err) {
+                console.error("❌ Error adding workout:", err);
+                return res.status(500).send("Failed to add workout.");
+            }
             res.redirect("/");
         }
     );
 });
 
 router.post("/delete/:id", (req, res) => {
-    workoutModel.deleteWorkout(req.params.id, (err) => {
-        if (err) return res.status(500).send("Couldn't complete the process of deleting workout");
+    const workoutId = req.params.id;
+
+    workoutModel.deleteWorkout(workoutId, (err) => {
+        if (err) {
+            console.error("❌ Error deleting workout:", err);
+            return res.status(500).send("Failed to delete workout.");
+        }
         res.redirect("/");
     });
 });
