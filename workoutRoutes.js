@@ -6,7 +6,6 @@ const workoutModel = require("./workoutModel");
 router.get("/", (req, res) => {
     workoutModel.getAllWorkouts((err, workouts) => {
         if (err) {
-            console.error("❌ Database error:", err);
             return res.status(500).send("Database error.");
         }
         res.render("index", { workouts: workouts });
@@ -26,7 +25,6 @@ router.post("/add", (req, res) => {
         { type: workout_type, duration, calories: calories_burned, date: workout_date, notes },
         (err) => {
             if (err) {
-                console.error("❌ Error adding workout:", err);
                 return res.status(500).send("Failed to add workout.");
             }
             res.redirect("/");
@@ -39,7 +37,6 @@ router.post("/delete/:id", (req, res) => {
 
     workoutModel.deleteWorkout(workoutId, (err) => {
         if (err) {
-            console.error("❌ Error deleting workout:", err);
             return res.status(500).send("Failed to delete workout.");
         }
         res.redirect("/");

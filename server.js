@@ -22,4 +22,4 @@ app.set("views", __dirname);
 app.use("/", workoutRoutes);
 
 
-app.listen(PORT, () => console.log(`✅ Server running on http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));

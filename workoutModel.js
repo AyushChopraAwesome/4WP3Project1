@@ -4,9 +4,9 @@ const path = require("path");
 const dbPath = path.join(__dirname, "workouts.db");
 const db = new sqlite3.Database(dbPath, (err) => {
     if (err) {
-        console.error("❌ Database connection error:", err.message);
+        console.error("Database connection error:", err.message);
     } else {
-        console.log("✅ Connected to SQLite database:", dbPath);
+        console.log("Connected to SQLite database:", dbPath);
     }
 });
 
