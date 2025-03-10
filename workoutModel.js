@@ -15,7 +15,7 @@ const workoutModel = {
         const sql = "SELECT * FROM Workouts ORDER BY workout_date DESC";
         db.all(sql, [], (err, rows) => {
             if (err) {
-                console.error("❌ Error fetching workouts:", err.message);
+                console.error("Error fetching workouts:", err.message);
                 return cb(err, null);
             }
             cb(null, rows);
@@ -58,7 +58,7 @@ const workoutModel = {
                 return cb(new Error("Workout not found."), null);
             }
 
-            console.log("✅ Workout deleted successfully:", workoutId);
+            console.log("Workout deleted successfully:", workoutId);
             cb(null, { deletedId: workoutId });
         });
     }

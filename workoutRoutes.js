@@ -44,7 +44,7 @@ router.post("/delete/:id", (req, res) => {
     const workoutId = req.params.id;
 
     if (!workoutId) {
-        console.warn("⚠️ Delete request received without an ID.");
+        console.warn("Delete request received without an ID.");
         return res.status(400).send("Error: Workout ID is required.");
     }
 
