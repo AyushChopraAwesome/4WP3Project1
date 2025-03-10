@@ -16,7 +16,7 @@ const workoutModel = {
     },
     addWorkout: (workout, callback) => {
         db.run(
-            "INSERT INTO Workouts (workout_type, duration, calories_burned, workout_date, notes) VALUES (?, ?, ?, ?, ?)",
+            "INSERT INTO Workouts (workout_type, duration, calories_burned, workout_date, notes) VALUES (?, ?, ?, ?)",
             [workout.type, workout.duration, workout.calories, workout.date, workout.notes],
             callback
         );
